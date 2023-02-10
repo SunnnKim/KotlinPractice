@@ -9,14 +9,13 @@ import java.nio.Buffer
  */
 
 fun main(){
-
 }
 /** 1. try catch
  * - 문법적으로 자바와 동일함
  * - 다만 기본구문이 달라 타입을 뒤에 명시해야함
  * - 문법적으로는 자바와 코틀린이 동일하지만
  * - 코틀린에서는 try catch가 expression 이기 떄문에
- * - 값은 반환하거 (return), 구문 자체를 값에 할당하는 것이 가능
+ * - 값은 반환하거나(return), 구문 자체를 값에 할당하는 것이 가능
  *
 private int parseIntOrThrow(@NotNull String str){
     try{
@@ -60,6 +59,9 @@ public void readFile(){ // IOException 필수
  * ---> 빨간줄이 나지 않음
  */
 class FilePrint {
+    fun main(){
+
+    }
     fun readFile(){
         val currentFile = File(".");
         val file = File(currentFile.absolutePath + "/a.txt")

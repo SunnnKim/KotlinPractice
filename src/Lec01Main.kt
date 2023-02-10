@@ -44,3 +44,6 @@ fun main(){
     var person:Person = Person();
 
 }
+fun printName(name: String?): String?{
+    return null
+}
