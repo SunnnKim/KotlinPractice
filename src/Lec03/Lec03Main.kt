@@ -1,4 +1,4 @@
-import java.util.IllegalFormatCodePointException
+import Lec09.Person
 
 /**
  * Type
@@ -92,7 +92,7 @@ fun printAgeIfPerson(obj:Any){
 // 3. is/!is
 fun printObj(obj:Any){
     if(obj !is Person){
-        println("obj is not Person")
+        println("obj is not Lec09.Person")
     }
     if(obj is Person) {
         println(obj.name)

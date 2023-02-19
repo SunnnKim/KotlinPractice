@@ -1,3 +1,4 @@
+import Lec09.Person
 
 fun main(){
     // 가변
@@ -41,7 +42,7 @@ fun main(){
     // 객체의 인스턴스화
     // 자바 = new 를 사용하여 생성
     // 코틀린은 new 쓰지않는다
-    var person:Person = Person();
+    var person: Person = Person();
 
 }
 fun printName(name: String?): String?{

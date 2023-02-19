@@ -1,12 +1,14 @@
-public class Person {
+package Lec09;
+
+public class PersonJava {
     String name;
     int age;
 
 
-    public Person(){
+    public PersonJava(){
 
     }
-    public Person(String name, int age){
+    public PersonJava(String name, int age){
         this.age = age;
         this.name = name;
     }

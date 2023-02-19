@@ -1,3 +1,5 @@
+package Lec04;
+
 public class JavaMoney implements Comparable<JavaMoney>{
 
     private final long amount;

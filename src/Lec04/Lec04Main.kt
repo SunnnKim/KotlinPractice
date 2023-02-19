@@ -1,3 +1,5 @@
+import Lec04.JavaMoney
+
 /***
  * # 코틀린에서 연산자를 다루는 방법
  *
@@ -22,8 +24,8 @@
 
 fun main(){
     // 2.
-    val m1:JavaMoney = JavaMoney(1_000L)
-    val m2:JavaMoney = JavaMoney(2_000L)
+    val m1: JavaMoney = JavaMoney(1_000L)
+    val m2: JavaMoney = JavaMoney(2_000L)
 
     // Comparable 객체를 비교할 때 compareTo 가 자동적으로 호출되어서 굳이 써주지 않아도 됨 (<,>,<=,>=)
     if(m1 < m2){

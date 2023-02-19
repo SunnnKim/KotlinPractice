@@ -1,3 +1,5 @@
+package Lec09
+
 /** 9강 코틀린에서 클래스를 다루는 방법
  *
  * 1. 코틀린에서 필드를 만들면 getter와 setter가 자동으로 생성 → 코틀린에서의 프로퍼티
@@ -9,15 +11,6 @@
  *
  *
  * */
-fun main(){
-    val person: Person = Person("hi",1)
-    println(person.name)
-    person.age = 1000
-    println(person.age)
-    // 주생성자, 부생성자
-    println("주생성자, 부생성자 순서확인 ")
-    val person2: Person = Person()
-}
 
 /** 1. 클래스와 프로퍼티
  * 코틀린에서는 기본이 public → 생략가능
