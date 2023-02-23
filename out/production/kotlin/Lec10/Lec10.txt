@@ -1,0 +1,120 @@
+< 10강 클래스에서 상속을 다루는 방법 >
+ * 1.추상클래스
+ * 2. 인터페이스
+ * 3. 클래스 상속시 주의할 점
+ * 4. 상속 관련 지시어 정리
+
+## 예제) Animal이라는 클래스를 Cat, Penguin 클래스가 상속하는 경우
+
+1. 추상메소드
+- 상속시에 : (콜론)을 사용한다
+- 코드 컨벤션이 다름
+    ** 타입에서 사용하는 콜론은 var a: String 이런 식으로 -> 변수종류 변수명: 변수타입
+    ** 상속 시 사용하는 콜론은 : 옆을 띄워준다
+
+// 예제
+-> 추상클래스
+- 오버라이드 하려고 하는 필드가 상위클래스에서 open 으로 지정된 변수여야 오버라이드가 가능하다
+abstract class Animal(
+    protected val species: String,
+    protected open val legCount: Int
+    // open : 추상프로퍼티가 아니라면 오버라이드를 하기 위해서 반드시 open키워드를 붙여야한다.
+) {
+    abstract fun move()
+}
+
+-> 상속받은 클래스
+class Cat(
+    species: String
+) : Animal(species, 4) { // 상위클래스의 생성자를 바로 호출해야함
+
+    override fun move() { // override 필수적으로 붙여줘야함
+        println("고양이")
+    }
+}
+
+
+### getter override
+- 추상클래스에서 이미 정의된 함수를 오버라이드 해야하는 경우에는 다음과 같은 순서로 진행한다.
+ 1. 프로퍼티에 override 키워드를 붙인다.
+ 2. custom getter 를 만들고 원하는 로직을 넣는다
+ ** 3. 오버라이드 하려고 하는 필드가 상위클래스에서 open 으로 지정된 변수여야 오버라이드가 가능하다
+ 4. 상위클래스에 접근하는 키워드는 super
+ 5. 자바와 코틀린 모두 추상 클래스는 인스턴스화 할 수 없다
+
+  override val legCount: Int
+        get() = super.legCount + this.wingCount
+
+
+
+2. 인터페이스 상속
+- 추상클래스와 마찬가지로 구현시 : 으로 상속받는다
+- 자바, 코틀린 모두 인터페이스를 인스턴스화 할 수 없다.
+
+class Penguin(
+    species: String,
+) : Animal(species, 2) , Swimmable, Flyable{ // 추상메소드, 인터페이스 모두 : 으로 상속받음
+    ...
+}
+
+- 인터페이스 함수구현 : super<인터페이스명>.함수명() 형식으로 되어있음
+- 오버라이드 함수 작성 시 override 키워드 반드시 붙여주어야 함
+    override fun act() {
+        super<Swimmable>.act()
+        super<Flyable>.act()
+    }
+
+
+- 코틀린에서는 backing field가 없는 프로퍼티를 인터페이스에 만들 수 있다.
+
+3. 클래스 상속 시 유의해야할 점
+
+1. open 을 사용한 클래스는 상속이 가능하다.
+2. open 을 사용한 클래스의 open 을 사용한 프로퍼티는 오버라이드가 가능하다.
+3. 다음의 경우에서 number는 어떤 값이 나올까?
+
+open class Base(
+    open val number: Int = 100
+){
+    init {
+        println(number)
+    }
+}
+class Derived(
+    override val number: Int
+) : Base(number) {
+    init {
+        println("Derived class")
+    }
+}
+
+fun main(){
+
+    Derived(300)
+}
+
+-> number는 0으로 나오는데, 그 이유는
+하위클래스 생성자에서 오버라이드 된 프로퍼티가 초기화 되기 전에 상위클래스의 생성자에서 number라는 open 된 프로퍼티에 접근하기 때문이다
+
+다음과 같은 오류가 나오지 않기위해서는
+1. 상위클래스의 constructor와 init 블럭에서는 하위 클래스에서 접근할 수 있는 (open 키워드를 가진) 프로퍼티에 접근하지 않거나
+2. open 키워드를 사용하면 안된다
+3. final 프로퍼티를 사용한다
+
+
+
+4. 상속관련 키워드 정리
+
+1. final : override 를 할 수 없게 한다. defalut로 보이지 않게 존재한다.
+2. open : override 를 열어 준다
+3. abstract : 반드시 override 하게 한다
+4. override : 상위타입을 오버라이드하고 있다 (반드시 붙여줘야함
+
+
+5. 정리
+- 상속 또는 구현을 할때 : 을 사용
+- 상위클래스 상속을 구현할 때 생성자를 반드시 호출해야한다.
+- override 필수로 붙여야함
+- 추상멤버가 아니면 기본적으로 오버라이드가 불가능하다
+    -> open 키워드를 사용하면 오버라이드가 가능하다
+- 상위클래스의 생성자 또는 init 블록에서 open 프로퍼티를 사용하면 예기치 못한 버그가 생길 수 있다.
